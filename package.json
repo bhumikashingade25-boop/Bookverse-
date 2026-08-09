@@ -1,0 +1,17 @@
+{
+  "name": "bookverse-app",
+  "version": "1.0.0",
+  "description": "BookVerse - Social Reading & Book Exchange Platform",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "node server/server.js",
+    "client": "npm --prefix client run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seed": "node server/seed/seedData.js",
+    "build": "npm --prefix client run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
