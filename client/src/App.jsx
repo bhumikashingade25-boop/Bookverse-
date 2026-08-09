@@ -55,8 +55,22 @@ const AppLayout = ({ children }) => {
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  if (loading) return <div className="p-12 text-center text-gray-400">Authenticating...</div>;
-  if (!user) return <Navigate to="/auth" replace />;
+
+  // Wait until authentication is checked
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Authenticating...
+      </div>
+    );
+  }
+
+  // User is not logged in
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+
+  // User is authenticated
   return children;
 };
 
