@@ -60,7 +60,6 @@ BookVerse is a social reading platform inspired by the familiarity of Instagram,
 - ElevenLabs (11 Labs)
 
 ## Team Members
-| # | Name | Role|
 | 1 | Akruti Kumari | Team Leader |
 | 2 | Insiyah Lokhandwala | Member |
 | 3 | Mudra Tandel | Member |
@@ -128,9 +127,5 @@ npm start
 ### 5. Access the App
 Open your browser and navigate to:
 ```
-http://localhost:3000
-```
-
----
 
 *"A book changes one reader. Shared books can change an entire community."*
