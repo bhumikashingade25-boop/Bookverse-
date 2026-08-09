@@ -65,9 +65,6 @@ BookVerse is a social reading platform inspired by the familiarity of Instagram,
 | 3 | Mudra Tandel | Member |
 | 4 | Bhumika Shingade | Member |
 
-**Institution:** Madhav Institute of Technology & Science, Gwalior (M.P.), India
-**Chapter:** IEEE Computer Society – MITS Student Branch Chapter
-
 ## Setup Instructions
 
 ### Prerequisites
