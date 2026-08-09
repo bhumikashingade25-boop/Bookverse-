@@ -71,7 +71,6 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setToken(null);
     localStorage.removeItem('bv_token');
-    localStorage.clear();
   };
 
   return (
