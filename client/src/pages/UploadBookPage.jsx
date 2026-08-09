@@ -15,8 +15,35 @@ const UploadBookPage = () => {
   const [condition, setCondition] = useState('Good');
   const [description, setDescription] = useState('');
   const [coverUrl, setCoverUrl] = useState('https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80');
+  const [photoBook, setPhotoBook] = useState([]);
   const [preferredExchangeGenre, setPreferredExchangeGenre] = useState('Sci-Fi');
   const [loading, setLoading] = useState(false);
+
+  const handlePhotoBookChange = (e) => {
+    const files = Array.from(e.target.files);
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoBook(prev => [...prev, reader.result]);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleCoverChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCoverUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemovePhoto = (index) => {
+    setPhotoBook(prev => prev.filter((_, i) => i !== index));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +62,7 @@ const UploadBookPage = () => {
         condition,
         description,
         coverUrl,
+        photoBook,
         preferredExchangeGenre
       });
 
@@ -134,15 +162,47 @@ const UploadBookPage = () => {
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-gray-300 font-semibold">Cover Image URL *</label>
+          <div className="space-y-4 border-t border-white/10 py-6 mt-4 flex flex-col items-center bg-[#15171E] rounded-2xl border p-4 shadow-inner">
+            <label className="text-gray-300 font-semibold flex items-center gap-2 w-full">
+              <Image className="w-5 h-5 text-gold-400" />
+              Book Cover Photo *
+            </label>
+            <div className="flex flex-col items-center gap-4 w-full">
+              <img src={coverUrl || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80'} alt="Cover Preview" className="w-40 h-56 sm:w-48 sm:h-64 rounded-xl object-cover border-4 border-gold-500 shadow-2xl shrink-0" />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleCoverChange}
+                className="w-full text-center text-gray-400 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-xs file:font-extrabold file:bg-gold-500 file:text-black hover:file:opacity-90 cursor-pointer"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2 border-t border-b border-white/10 py-4 my-4">
+            <label className="text-gray-300 font-semibold flex items-center gap-2">
+              <Image className="w-4 h-4 text-gold-400" />
+              Photo Book (Exchange Verification)
+            </label>
+            <p className="text-gray-400 text-[10px]">Upload multiple photos (front, back, spine, pages) to verify the book's condition for exchange.</p>
+            
             <input
-              type="text"
-              required
-              value={coverUrl}
-              onChange={(e) => setCoverUrl(e.target.value)}
-              className="w-full bg-[#1F2430] border border-white/10 rounded-xl p-3 text-white outline-none"
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handlePhotoBookChange}
+              className="w-full text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gold-500/10 file:text-gold-400 hover:file:bg-gold-500/20 cursor-pointer"
             />
+
+            {photoBook.length > 0 && (
+              <div className="flex flex-wrap gap-4 mt-4">
+                {photoBook.map((photoUrl, idx) => (
+                  <div key={idx} className="relative group">
+                    <img src={photoUrl} alt={`Photo ${idx+1}`} className="w-24 h-24 sm:w-32 sm:h-32 rounded-xl object-cover border-2 border-white/20 shadow-md" />
+                    <button type="button" onClick={() => handleRemovePhoto(idx)} className="absolute -top-3 -right-3 bg-rose-500 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs shadow-xl opacity-0 group-hover:opacity-100 transition hover:bg-rose-600 hover:scale-110">✕</button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="space-y-1">

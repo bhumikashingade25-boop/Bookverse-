@@ -7,7 +7,7 @@ exports.getPosts = async (req, res) => {
   try {
     const posts = await Post.find()
       .populate('author', 'name avatar location streakDays')
-      .populate('book', 'title author coverUrl')
+      .populate('book', 'title author coverUrl photoBook')
       .sort({ createdAt: -1 });
 
     res.json({ success: true, count: posts.length, posts });
@@ -34,7 +34,7 @@ exports.createPost = async (req, res) => {
 
     const populatedPost = await Post.findById(post._id)
       .populate('author', 'name avatar location streakDays')
-      .populate('book', 'title author coverUrl');
+      .populate('book', 'title author coverUrl photoBook');
 
     res.status(201).json({ success: true, post: populatedPost });
   } catch (error) {

@@ -19,6 +19,7 @@ const NearbyMapPage = () => {
   const [selectedBookToRequest, setSelectedBookToRequest] = useState(null);
   const [myBooks, setMyBooks] = useState([]);
   const [offeredBookId, setOfferedBookId] = useState('');
+  const [exchangeMethod, setExchangeMethod] = useState('PHYSICAL_MEET');
 
   const fetchMapBooks = async () => {
     try {
@@ -57,7 +58,8 @@ const NearbyMapPage = () => {
     try {
       const res = await createExchangeApi({
         requestedBookId: selectedBookToRequest._id,
-        offeredBookId
+        offeredBookId,
+        exchangeMethod
       });
 
       if (res.data.success) {
@@ -188,6 +190,35 @@ const NearbyMapPage = () => {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-gray-300 font-semibold">Preferred Exchange Method</label>
+              <div className="flex items-center gap-4 mt-1">
+                <label className="flex items-center gap-2 cursor-pointer p-3 bg-[#1F2430] border border-white/10 rounded-xl flex-1 hover:border-gold-500/50 transition">
+                  <input
+                    type="radio"
+                    name="exchangeMethod"
+                    value="PHYSICAL_MEET"
+                    checked={exchangeMethod === 'PHYSICAL_MEET'}
+                    onChange={(e) => setExchangeMethod(e.target.value)}
+                    className="accent-gold-500 w-4 h-4"
+                  />
+                  <span className="text-white font-medium">🤝 Physical Meet</span>
+                </label>
+                
+                <label className="flex items-center gap-2 cursor-pointer p-3 bg-[#1F2430] border border-white/10 rounded-xl flex-1 hover:border-gold-500/50 transition">
+                  <input
+                    type="radio"
+                    name="exchangeMethod"
+                    value="ONLINE_DELIVERY"
+                    checked={exchangeMethod === 'ONLINE_DELIVERY'}
+                    onChange={(e) => setExchangeMethod(e.target.value)}
+                    className="accent-gold-500 w-4 h-4"
+                  />
+                  <span className="text-white font-medium">📦 Online Delivery</span>
+                </label>
+              </div>
             </div>
 
             <div className="flex justify-end gap-2 pt-2">

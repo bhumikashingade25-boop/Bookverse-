@@ -31,7 +31,7 @@ exports.getExchanges = async (req, res) => {
 // Create / Express Interest in an Exchange Request
 exports.createExchangeRequest = async (req, res) => {
   try {
-    const { requestedBookId, offeredBookId, notes } = req.body;
+    const { requestedBookId, offeredBookId, notes, exchangeMethod } = req.body;
 
     const requestedBook = await Book.findById(requestedBookId);
     if (!requestedBook) {
@@ -61,6 +61,7 @@ exports.createExchangeRequest = async (req, res) => {
       recipient: requestedBook.owner,
       requestedBook: requestedBook._id,
       offeredBook: offeredBook._id,
+      exchangeMethod: exchangeMethod || 'PHYSICAL_MEET',
       notes: notes || '',
       status: 'REQUESTED'
     });

@@ -12,6 +12,7 @@ const bookSchema = new mongoose.Schema({
   },
   description: { type: String, required: true },
   coverUrl: { type: String, required: true },
+  photoBook: [{ type: String }],
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
   preferredExchangeGenre: { type: String, default: 'Any' },
   location: {

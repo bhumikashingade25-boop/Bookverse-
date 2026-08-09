@@ -60,12 +60,12 @@ const BookCard = ({ book, onWishlist, onExchangeRequest }) => {
 
         {/* Status Badge */}
         <div className="absolute top-3 left-3">
-          <span className={`px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-lg uppercase backdrop-blur-md border ${
+          <span className={`px-3 py-1 rounded-full text-xs font-extrabold tracking-wide shadow-xl uppercase backdrop-blur-xl border ${
             isMyBook
-              ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
+              ? 'bg-purple-900/80 text-purple-100 border-purple-500/50'
               : isAvailable 
-              ? 'bg-gold-500/20 text-gold-300 border-gold-500/40' 
-              : 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+              ? 'bg-black/70 text-gold-400 border-gold-500/50' 
+              : 'bg-amber-900/80 text-amber-100 border-amber-500/50'
           }`}>
             {isMyBook ? 'Your Listed Book' : isAvailable ? 'Available to Swap' : 'Pending Exchange'}
           </span>

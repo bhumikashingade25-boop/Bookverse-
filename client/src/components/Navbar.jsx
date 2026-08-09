@@ -7,15 +7,16 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { useSocket } from '../context/SocketContext';
 import { getNotificationsApi } from '../services/api';
 import Logo from './Logo';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const { theme, toggleTheme, isDark } = useTheme();
+  const { unreadCount, updateUnreadCount } = useSocket();
   const navigate = useNavigate();
   const location = useLocation();
-  const [unreadCount, setUnreadCount] = useState(0);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,7 +25,7 @@ const Navbar = () => {
     if (user) {
       getNotificationsApi().then(res => {
         if (res.data.success) {
-          setUnreadCount(res.data.unreadCount || 0);
+          updateUnreadCount(res.data.unreadCount || 0);
         }
       }).catch(err => console.log('Notifications count error', err));
     }

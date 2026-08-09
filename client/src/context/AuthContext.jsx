@@ -63,6 +63,10 @@ export const AuthProvider = ({ children }) => {
     throw new Error(res.data.message || 'Registration failed');
   };
 
+  const updateUser = (newUserData) => {
+    setUser(newUserData);
+  };
+
   const logout = () => {
     setUser(null);
     setToken(null);
@@ -77,6 +81,7 @@ export const AuthProvider = ({ children }) => {
       loading,
       login,
       register,
+      updateUser,
       logout,
       isAuthenticated: !!user
     }}>

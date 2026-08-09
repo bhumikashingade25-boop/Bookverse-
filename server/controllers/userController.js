@@ -5,6 +5,7 @@ const Post = require('../models/Post');
 const Achievement = require('../models/Achievement');
 const Notification = require('../models/Notification');
 const ConnectionRequest = require('../models/ConnectionRequest');
+const socketModule = require('../socket');
 
 // Get User Profile with Stats & Collections
 exports.getUserProfile = async (req, res) => {
@@ -125,7 +126,7 @@ exports.sendConnectionRequest = async (req, res) => {
     }
 
     // Create Notification for the Recipient
-    await Notification.create({
+    const notification = await Notification.create({
       recipient: recipientId,
       sender: currentUserId,
       type: 'CONNECTION_REQUEST',
@@ -134,6 +135,9 @@ exports.sendConnectionRequest = async (req, res) => {
       link: '/network',
       connectionRequestId: existing._id
     });
+    
+    await notification.populate('sender', 'name avatar');
+    socketModule.sendNotificationToUser(recipientId, notification);
 
     res.json({
       success: true,
@@ -185,7 +189,7 @@ exports.acceptConnectionRequest = async (req, res) => {
     } catch (e) {}
 
     // Notify the original sender
-    await Notification.create({
+    const notification = await Notification.create({
       recipient: senderId,
       sender: currentUserId,
       type: 'CONNECTION_ACCEPTED',
@@ -193,6 +197,9 @@ exports.acceptConnectionRequest = async (req, res) => {
       message: `${req.user.name} accepted your connection request. You are now connected!`,
       link: `/profile/${currentUserId}`
     });
+
+    await notification.populate('sender', 'name avatar');
+    socketModule.sendNotificationToUser(senderId, notification);
 
     // Mark any existing request notification as read
     try {
@@ -310,7 +317,7 @@ exports.followUser = async (req, res) => {
     await User.findByIdAndUpdate(currentUserId, { $inc: { followingCount: 1 } });
 
     // Send notification to target user
-    await Notification.create({
+    const notification = await Notification.create({
       recipient: targetUserId,
       sender: currentUserId,
       type: 'NEW_FOLLOWER',
@@ -318,6 +325,9 @@ exports.followUser = async (req, res) => {
       message: `${req.user.name} started following your reading profile.`,
       link: `/profile/${currentUserId}`
     });
+
+    await notification.populate('sender', 'name avatar');
+    socketModule.sendNotificationToUser(targetUserId, notification);
 
     res.json({ success: true, message: 'Followed user successfully' });
   } catch (error) {

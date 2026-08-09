@@ -5,6 +5,11 @@ const exchangeRequestSchema = new mongoose.Schema({
   recipient: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
   requestedBook: { type: mongoose.Schema.Types.ObjectId, ref: 'Book', required: true },
   offeredBook: { type: mongoose.Schema.Types.ObjectId, ref: 'Book', required: true },
+  exchangeMethod: {
+    type: String,
+    enum: ['PHYSICAL_MEET', 'ONLINE_DELIVERY'],
+    default: 'PHYSICAL_MEET'
+  },
   status: {
     type: String,
     enum: [

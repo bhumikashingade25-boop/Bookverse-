@@ -1,4 +1,6 @@
 const express = require('express');
+const http = require('http');
+const socketModule = require('./socket');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
@@ -8,6 +10,9 @@ const errorHandler = require('./middleware/error');
 dotenv.config();
 
 const app = express();
+const httpServer = http.createServer(app);
+socketModule.init(httpServer);
+
 const PORT = process.env.PORT || 5000;
 
 // Enable CORS and JSON parsing
@@ -62,9 +67,10 @@ const initApp = async () => {
 
 initApp();
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`====================================================`);
   console.log(`🚀 BookVerse Express Server running on port ${PORT}`);
+  console.log(`📡 WebSocket server running`);
   console.log(`📖 API Health: http://localhost:${PORT}/api/health`);
   console.log(`====================================================`);
 });

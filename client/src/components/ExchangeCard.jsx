@@ -64,9 +64,16 @@ const ExchangeCard = ({ exchange, isReceived, onUpdate }) => {
           </div>
         </div>
 
-        <span className={`px-3 py-1 rounded-full text-xs font-bold border uppercase ${statusColors[exchange.status] || statusColors.REQUESTED}`}>
-          {exchange.status.replace('_', ' ')}
-        </span>
+        <div className="flex flex-col items-end gap-1">
+          <span className={`px-3 py-1 rounded-full text-xs font-bold border uppercase ${statusColors[exchange.status] || statusColors.REQUESTED}`}>
+            {exchange.status.replace('_', ' ')}
+          </span>
+          {exchange.exchangeMethod && (
+            <span className="text-[10px] font-bold text-gray-300 bg-[#1F2430] px-2 py-0.5 rounded-md border border-white/10">
+              {exchange.exchangeMethod === 'ONLINE_DELIVERY' ? '📦 Online Delivery' : '🤝 Physical Meet'}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Books Swap Graphic */}

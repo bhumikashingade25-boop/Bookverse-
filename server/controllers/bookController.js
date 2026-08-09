@@ -64,7 +64,7 @@ exports.getBookById = async (req, res) => {
 // Create / Upload New Book
 exports.createBook = async (req, res) => {
   try {
-    const { title, author, isbn, genre, condition, description, coverUrl, preferredExchangeGenre, location } = req.body;
+    const { title, author, isbn, genre, condition, description, coverUrl, photoBook, preferredExchangeGenre, location } = req.body;
 
     const book = await Book.create({
       title,
@@ -74,6 +74,7 @@ exports.createBook = async (req, res) => {
       condition,
       description,
       coverUrl,
+      photoBook: photoBook || [],
       preferredExchangeGenre: preferredExchangeGenre || 'Any',
       owner: req.user._id,
       location: location || req.user.location,

@@ -48,7 +48,7 @@ const PostCard = ({ post, onWishlist }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img
-            src={post.author?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'}
+            src={(post.author?._id === user?._id && user?.avatar) ? user.avatar : (post.author?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80')}
             alt={post.author?.name}
             className="w-10 h-10 rounded-full object-cover border border-gold-500/40"
           />
@@ -107,6 +107,15 @@ const PostCard = ({ post, onWishlist }) => {
               <Bookmark className="w-4 h-4" />
             </button>
           )}
+        </div>
+      )}
+
+      {/* Book Photo Book Preview */}
+      {post.book?.photoBook && post.book.photoBook.length > 0 && (
+        <div className="flex gap-2 overflow-x-auto pb-1 mt-2 scrollbar-hide">
+          {post.book.photoBook.map((photoUrl, idx) => (
+            <img key={idx} src={photoUrl} alt={`Photo ${idx+1}`} className="w-16 h-16 rounded-lg object-cover border border-white/10 shrink-0 cursor-pointer hover:border-gold-400 transition" onClick={() => window.open(photoUrl, '_blank')} />
+          ))}
         </div>
       )}
 

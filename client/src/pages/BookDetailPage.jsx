@@ -176,6 +176,18 @@ const BookDetailPage = () => {
               <span className="text-gray-400">Owner's Preferred Exchange Genre:</span>
               <span className="font-bold text-gold-300 uppercase">{book.preferredExchangeGenre || 'Any'}</span>
             </div>
+
+            {/* Photo Book */}
+            {book.photoBook && book.photoBook.length > 0 && (
+              <div className="space-y-2 mt-4 pt-4 border-t border-white/10">
+                <h4 className="font-bold text-xs text-gray-400 uppercase tracking-wider">Exchange Photo Book</h4>
+                <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                  {book.photoBook.map((photoUrl, idx) => (
+                    <img key={idx} src={photoUrl} alt={`Photo ${idx+1}`} className="w-20 h-20 rounded-xl object-cover border border-white/10 cursor-pointer hover:border-gold-400 transition" onClick={() => window.open(photoUrl, '_blank')} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Owner Info & Action Buttons */}

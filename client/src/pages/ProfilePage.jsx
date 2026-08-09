@@ -19,7 +19,7 @@ import { useToast } from '../context/ToastContext';
 
 const ProfilePage = () => {
   const { id } = useParams();
-  const { user: currentUser } = useAuth();
+  const { user: currentUser, updateUser } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
 
@@ -111,12 +111,24 @@ const ProfilePage = () => {
         readingGoal: { yearlyTarget: Number(editYearlyGoal) }
       });
       if (res.data.success) {
+        if (updateUser) updateUser(res.data.user);
         showToast('🎉 Your profile has been updated!');
         setEditModalOpen(false);
         fetchProfile();
       }
     } catch (err) {
       showToast('Error updating profile', 'error');
+    }
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditAvatar(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -148,7 +160,7 @@ const ProfilePage = () => {
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
           <div className="relative shrink-0">
             <img
-              src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'}
+              src={(isSelf && currentUser?.avatar) ? currentUser.avatar : (user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80')}
               alt={user.name}
               className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover border-2 border-gold-500 shadow-xl"
             />
@@ -483,15 +495,12 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-gray-300 font-semibold">Avatar Image URL</label>
-            <input
-              type="url"
-              value={editAvatar}
-              onChange={(e) => setEditAvatar(e.target.value)}
-              placeholder="https://..."
-              className="w-full bg-[#1F2430] border border-white/10 rounded-xl p-3 text-white outline-none font-medium"
-            />
+          <div className="space-y-3 flex flex-col items-center pb-4 border-b border-white/10">
+            <label className="text-gray-300 font-semibold w-full text-left">Profile Avatar (DP)</label>
+            <div className="flex flex-col items-center gap-4 w-full">
+              <img src={editAvatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'} alt="DP preview" className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-gold-500 shadow-xl" />
+              <input type="file" accept="image/*" onChange={handleAvatarChange} className="w-full text-center text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-gold-500/10 file:text-gold-400 hover:file:bg-gold-500/20 cursor-pointer" />
+            </div>
           </div>
 
           <div className="flex justify-end gap-2 pt-2">

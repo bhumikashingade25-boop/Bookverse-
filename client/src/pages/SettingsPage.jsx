@@ -5,26 +5,42 @@ import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 
 const SettingsPage = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const { showToast } = useToast();
 
   const [name, setName] = useState(user?.name || '');
   const [bio, setBio] = useState(user?.bio || '');
   const [city, setCity] = useState(user?.location?.city || 'Mumbai');
   const [yearlyTarget, setYearlyTarget] = useState(user?.readingGoal?.yearlyTarget || 24);
+  const [avatar, setAvatar] = useState(user?.avatar || '');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateUserProfileApi(user._id, {
+      const res = await updateUserProfileApi(user._id, {
         name,
         bio,
+        avatar,
         location: { ...user.location, city },
         readingGoal: { yearlyTarget: Number(yearlyTarget), completedThisYear: user.readingGoal?.completedThisYear || 8 }
       });
-      showToast('Settings saved successfully!');
+      if (res.data.success) {
+        updateUser(res.data.user);
+        showToast('Settings saved successfully!');
+      }
     } catch (err) {
       showToast('Error saving settings', 'error');
+    }
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -41,6 +57,14 @@ const SettingsPage = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+          <div className="space-y-2 flex flex-col items-center sm:items-start pb-2 border-b border-white/10">
+            <label className="text-gray-300 font-semibold">Profile Avatar (DP)</label>
+            <div className="flex items-center gap-4 w-full">
+              <img src={avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'} alt="DP preview" className="w-16 h-16 rounded-full object-cover border-2 border-gold-500/50" />
+              <input type="file" accept="image/*" onChange={handleAvatarChange} className="text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-gold-500/10 file:text-gold-400 hover:file:bg-gold-500/20 cursor-pointer" />
+            </div>
+          </div>
+
           <div className="space-y-1">
             <label className="text-gray-300 font-semibold">Display Name</label>
             <input
