@@ -123,12 +123,5 @@ cd client
 npm run dev
 ```
 
-### 5. Access the App
-
-Open your web browser and navigate to:
-
-
----
-
 > *"A book changes one reader. Shared books can change an entire community."*
 
