@@ -47,6 +47,9 @@ https://drive.google.com/file/d/1zbdx8bvvXrjVJ87u8UDKC7zrGrO9htc-/view?usp=drive
 ## deployment link
 https://bookverse-20.vercel.app/
 
+## video link
+https://drive.google.com/file/d/1k8iq3R_ezNZXznbdk_U5HgYw6ELZADHY/view?usp=drivesdk
+
 ## Technology Stack
 
 **Frontend**
