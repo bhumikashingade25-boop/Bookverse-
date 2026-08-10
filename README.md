@@ -77,17 +77,20 @@ BookVerse is a social reading platform inspired by the familiarity of modern soc
 ```bash
 git clone https://github.com/YOUR_USERNAME/bookverse.git
 cd bookverse
+```
 
-## 2. Install Dependencies
+### 2. Install Dependencies
+```bash
+# Install backend dependencies
 cd server
 npm install
-
+# Install frontend dependencies
 cd ../client
 npm install
 cd ..
+```
 
 ### 3. Configure Environment Variables (Optional)
-
 Create a `.env` file in the `server` directory with:
 ```env
 PORT=5000
@@ -95,7 +98,6 @@ MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=bookverse_super_secret_jwt_key_2026
 N8N_WEBHOOK_URL=your_n8n_webhook_url
 ```
-
 Create a `.env` file in the `client` directory with:
 ```env
 VITE_API_URL=http://localhost:5000/api
