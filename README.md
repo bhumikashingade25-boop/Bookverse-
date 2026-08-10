@@ -37,6 +37,13 @@ BookVerse is a social reading platform inspired by the familiarity of modern soc
 - Reading clubs & community group discussions (`/clubs`)
 - Admin moderation dashboard for platform governance (`/admin` - Exclusive to Bhumika)
 
+## PPT Link
+
+https://drive.google.com/file/d/1A8aKSeOosPZfy3xk4bgIhA5vqtuaqFgk/view?usp=drivesdk
+
+## Live Demonstration Link
+
+
 ## Technology Stack
 
 **Frontend**
