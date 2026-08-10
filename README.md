@@ -44,6 +44,8 @@ https://drive.google.com/file/d/1A8aKSeOosPZfy3xk4bgIhA5vqtuaqFgk/view?usp=drive
 ## document link
 https://drive.google.com/file/d/1zbdx8bvvXrjVJ87u8UDKC7zrGrO9htc-/view?usp=drivesdk
 
+## document link
+https://bookverse-20.vercel.app/
 ## Technology Stack
 
 **Frontend**
