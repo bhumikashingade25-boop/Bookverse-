@@ -54,10 +54,9 @@ BookVerse is a social reading platform inspired by the familiarity of Instagram,
 - Firebase Authentication
 
 **APIs & Automation**
-- Google Maps API (nearby reader matching)
+- Open Street Maps (nearby reader matching)
 - AI Recommendation Engine
 - n8n (workflow automation)
-- ElevenLabs (11 Labs)
 
 ## Team Members
 | 1 | Akruti Kumari | Team Leader |
@@ -71,9 +70,7 @@ BookVerse is a social reading platform inspired by the familiarity of Instagram,
 - Node.js (v18 or later) and npm installed
 - MongoDB instance (local or MongoDB Atlas)
 - Firebase project (for Authentication)
-- Google Maps API key
 - n8n instance (for workflow automation, optional for local dev)
-- ElevenLabs API key (if voice/audio features are used)
 
 ### 1. Clone the Repository
 ```bash
@@ -100,8 +97,6 @@ MONGODB_URI=your_mongodb_connection_string
 FIREBASE_API_KEY=your_firebase_api_key
 FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
 FIREBASE_PROJECT_ID=your_firebase_project_id
-GOOGLE_MAPS_API_KEY=your_google_maps_api_key
-ELEVENLABS_API_KEY=your_elevenlabs_api_key
 N8N_WEBHOOK_URL=your_n8n_webhook_url
 ```
 
@@ -109,8 +104,6 @@ Create a `.env` file in the `client` directory with:
 ```env
 REACT_APP_API_BASE_URL=http://localhost:5000
 REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
-REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
-```
 
 ### 4. Run the Application
 ```bash
