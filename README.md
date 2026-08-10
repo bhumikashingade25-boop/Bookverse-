@@ -41,8 +41,8 @@ BookVerse is a social reading platform inspired by the familiarity of modern soc
 
 https://drive.google.com/file/d/1A8aKSeOosPZfy3xk4bgIhA5vqtuaqFgk/view?usp=drivesdk
 
-## Live Demonstration Link
-
+## document link
+https://drive.google.com/file/d/1zbdx8bvvXrjVJ87u8UDKC7zrGrO9htc-/view?usp=drivesdk
 
 ## Technology Stack
 
