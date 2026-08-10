@@ -78,33 +78,3 @@ BookVerse is a social reading platform inspired by the familiarity of modern soc
 git clone https://github.com/YOUR_USERNAME/bookverse.git
 cd bookverse
 
-###** 2. Install Dependencies**
-
-bash
-
-# Install backend dependencies
-cd server
-npm install
-
-# Install frontend dependencies
-cd ../client
-npm install
-cd ..
-
-### **3. Run the Application**
-
-bash
-
-# Terminal 1: Start Backend Server (Port 5000)
-cd server
-node server.js
-
-# Terminal 2: Start Frontend App (Port 5173)
-cd client
-npm run dev
-
-4. Access the App
-
-
-> *"A book changes one reader. Shared books can change an entire community."*
-
