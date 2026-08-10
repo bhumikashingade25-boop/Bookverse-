@@ -78,7 +78,7 @@ BookVerse is a social reading platform inspired by the familiarity of modern soc
 git clone https://github.com/YOUR_USERNAME/bookverse.git
 cd bookverse
 
-2. Install Dependencies
+###** 2. Install Dependencies**
 
 bash
 
@@ -91,7 +91,7 @@ cd ../client
 npm install
 cd ..
 
-3. Run the Application
+### **3. Run the Application**
 
 bash
 
