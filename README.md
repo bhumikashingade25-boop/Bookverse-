@@ -48,7 +48,7 @@ https://drive.google.com/file/d/1zbdx8bvvXrjVJ87u8UDKC7zrGrO9htc-/view?usp=drive
 https://bookverse-20.vercel.app/
 
 ## video link
-https://drive.google.com/file/d/1k8iq3R_ezNZXznbdk_U5HgYw6ELZADHY/view?usp=drivesdk
+https://drive.google.com/file/d/1tj78nRlVgoWfYTgrJpGEek13V_Cgf51S/view?usp=drivesdk
 
 ## Technology Stack
 
