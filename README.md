@@ -78,3 +78,53 @@ BookVerse is a social reading platform inspired by the familiarity of modern soc
 git clone https://github.com/YOUR_USERNAME/bookverse.git
 cd bookverse
 
+### 2. Install Dependencies
+```bash
+# Install backend dependencies
+cd server
+npm install
+
+# Install frontend dependencies
+cd ../client
+npm install
+cd ..
+```
+
+### 3. Configure Environment Variables (Optional)
+
+Create a `.env` file in the `server` directory with:
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=bookverse_super_secret_jwt_key_2026
+N8N_WEBHOOK_URL=your_n8n_webhook_url
+```
+
+Create a `.env` file in the `client` directory with:
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+*(Note: If no external MongoDB URI is provided, BookVerse will automatically run using its built-in zero-config In-Memory database engine for instant local execution).*
+
+### 4. Run the Application
+
+```bash
+# Terminal 1: Start the Backend Server (from /server)
+cd server
+node server.js
+
+# Terminal 2: Start the Frontend App (from /client, in a new terminal)
+cd client
+npm run dev
+```
+
+### 5. Access the App
+
+Open your web browser and navigate to:
+**http://localhost:5173**
+
+---
+
+> *"A book changes one reader. Shared books can change an entire community."*
+
