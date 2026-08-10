@@ -105,8 +105,6 @@ Create a `.env` file in the `client` directory with:
 VITE_API_URL=http://localhost:5000/api
 ```
 
-*(Note: If no external MongoDB URI is provided, BookVerse will automatically run using its built-in zero-config In-Memory database engine for instant local execution).*
-
 ### 4. Run the Application
 
 ```bash
@@ -122,7 +120,7 @@ npm run dev
 ### 5. Access the App
 
 Open your web browser and navigate to:
-**http://localhost:5173**
+
 
 ---
 
