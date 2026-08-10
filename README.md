@@ -92,6 +92,7 @@ cd ..
 
 ### 3. Configure Environment Variables (Optional)
 Create a `.env` file in the `server` directory with:
+
 ```env
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
