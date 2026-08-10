@@ -78,17 +78,13 @@ BookVerse is a social reading platform inspired by the familiarity of modern soc
 git clone https://github.com/YOUR_USERNAME/bookverse.git
 cd bookverse
 
-### 2. Install Dependencies
-```bash
-# Install backend dependencies
+## 2. Install Dependencies
 cd server
 npm install
 
-# Install frontend dependencies
 cd ../client
 npm install
 cd ..
-```
 
 ### 3. Configure Environment Variables (Optional)
 
