@@ -66,7 +66,15 @@ const initApp = async () => {
 };
 
 initApp();
+const path = require('path');
 
+// Serve frontend static assets from the client/dist folder
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Handle any requests that don't match the API routes by sending the React index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
 httpServer.listen(PORT, () => {
   console.log(`====================================================`);
   console.log(`🚀 BookVerse Express Server running on port ${PORT}`);
